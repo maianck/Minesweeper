@@ -22,7 +22,10 @@ void showGameWindow() {
             if(event.type == Event::Closed) window.close(),showPlayWindow();
             if(event.type == Event::MouseButtonPressed) {
                 if(event.mouseButton.button == Mouse::Left) show[x][y] = grid[x][y];
-                else if(event.mouseButton.button == Mouse::Right) show[x][y] = 11;
+                else if(event.mouseButton.button == Mouse::Right) {
+                    if(show[x][y]==10) show[x][y] = 11;
+                    else if(show[x][y]==11) show[x][y] = 10;
+                }
             }
         }
         if(show[x][y]==0) extend();

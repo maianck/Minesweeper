@@ -23,10 +23,10 @@ bool inside(int x,int y,int u,int v,int dai,int rong);
 #include "PlayWindow.h"
 #include "RankWindow.h"
 
-//kiểm tra xem vị trí của chuột có nằm trong vùng có góc trên trái (u,v), dài rộng: dai,rong
-bool inside(int x,int y,int u,int v,int dai,int rong) {
+//kiểm tra xem vị trí của chuột có nằm trong vùng từ (u,v) -> (u1,v1)
+bool inside(int x,int y,int u,int v,int u1,int v1) {
     if(x<u||y<v) return false;
-    if(x>u+dai||y>v+rong) return false;
+    if(x>u1||y>v1) return false;
     return true;
 }
 

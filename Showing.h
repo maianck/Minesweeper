@@ -7,6 +7,6 @@ void setShow() {
 }
 
 //mở rộng khi nhấn vào ô 0
-void extend() {
+void extend(int x,int y) {
 
 }

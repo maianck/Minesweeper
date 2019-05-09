@@ -28,9 +28,9 @@ void showGameWindow() {
                 }
             }
         }
-        if(show[x][y]==0) extend();
+        if(show[x][y]==0) extend(x,y);
 
-        window.clear();
+        window.clear(Color(200,0,0));
         for(int i=1;i<=length;++i)
         for(int j=1;j<=height;++j) {
             if(show[x][y]==9) show[i][j] = grid[i][j];

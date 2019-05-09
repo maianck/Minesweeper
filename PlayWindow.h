@@ -25,7 +25,7 @@ void showPlayWindow() {
                 }
             }
         }
-        mainW.clear(Color::Black);
+        mainW.clear(Color(200,0,0));
         //continue button
         t.loadFromFile("images/continue.jpg");
         s.setTexture(t);

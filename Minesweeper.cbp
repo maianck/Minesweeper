@@ -51,6 +51,8 @@
 		<Unit filename="GameWindow.h" />
 		<Unit filename="GridCreation.h" />
 		<Unit filename="MainWindow.h" />
+		<Unit filename="PlayWindow.h" />
+		<Unit filename="RankWindow.h" />
 		<Unit filename="Setting.h" />
 		<Unit filename="Showing.h" />
 		<Unit filename="main.cpp" />

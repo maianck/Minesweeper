@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1557146226 source:g:\minesweeper\main.cpp
+1557418363 source:g:\minesweeper\main.cpp
 	<SFML/Graphics.hpp>
 	<bits/stdc++.h>
 	"GridCreation.h"
@@ -420,13 +420,13 @@
 
 1557032067 g:\minesweeper\gridcreation.h
 
-1557144562 g:\minesweeper\showing.h
+1557219322 g:\minesweeper\showing.h
 
-1557145834 g:\minesweeper\mainwindow.h
+1557419653 g:\minesweeper\mainwindow.h
 
-1557147329 g:\minesweeper\gamewindow.h
+1557219926 g:\minesweeper\gamewindow.h
 
-1557146253 g:\minesweeper\playwindow.h
+1557219952 g:\minesweeper\playwindow.h
 
 1557144494 g:\minesweeper\rankwindow.h
 

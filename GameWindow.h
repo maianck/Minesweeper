@@ -21,16 +21,18 @@ void showGameWindow() {
         {
             if(event.type == Event::Closed) window.close(),showPlayWindow();
             if(event.type == Event::MouseButtonPressed) {
-                if(event.mouseButton.button == Mouse::Left) show[x][y] = grid[x][y];
+                if(event.mouseButton.button == Mouse::Left) {
+                    show[x][y] = grid[x][y];
+                    if(show[x][y]==0) extend(x,y);
+                }
                 else if(event.mouseButton.button == Mouse::Right) {
                     if(show[x][y]==10) show[x][y] = 11;
                     else if(show[x][y]==11) show[x][y] = 10;
                 }
             }
         }
-        if(show[x][y]==0) extend(x,y);
 
-        window.clear(Color(200,0,0));
+        window.clear(Color(228,165,97));
         for(int i=1;i<=length;++i)
         for(int j=1;j<=height;++j) {
             if(show[x][y]==9) show[i][j] = grid[i][j];

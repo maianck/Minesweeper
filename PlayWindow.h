@@ -21,6 +21,8 @@ void showPlayWindow() {
                     //nhấn nút new game
                     if(inside(pos.x,pos.y,xNew,yNew,x1New,y1New)) {
                         mainW.close();
+                        setSize(9,9,10,32);
+                        setShow();
                         showGameWindow();
                     }
                     //nhấn nút back

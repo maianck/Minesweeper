@@ -15,8 +15,22 @@ void showPlayWindow() {
                 if(event.mouseButton.button == Mouse::Left) {
                     //nhấn nút continue
                     if(inside(pos.x,pos.y,xCon,yCon,x1Con,y1Con)) {
-                        mainW.close();
                         //hiển thị bản chơi dở lưu trong file
+                        mainW.close();
+                        std::ifstream read;
+                        read.open("save.txt");
+                        read>>length>>height>>numBomb>>w>>notOpen;
+                        for(int i=1;i<=length;++i) {
+                            for(int j=1;j<=height;++j) read>>grid[i][j];
+                        }
+                        for(int i=1;i<=length;++i)
+                        for(int j=1;j<=height;++j){
+                            read>>show[i][j];
+                            if(show[i][j]==grid[i][j]) cl[i][j]=1;
+                            else cl[i][j]=0;
+                        }
+                        read.close();
+                        showGameWindow();
                     }
                     //nhấn nút new game
                     if(inside(pos.x,pos.y,xNew,yNew,x1New,y1New)) {

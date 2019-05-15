@@ -17,14 +17,20 @@ void showHelp() {
     }
 }
 
-void showOption() {
-
-}
-
 void showGameWindow() {
     int dai = length*w + 20;
     int rong = height*w + 100;
     RenderWindow window(sf::VideoMode(dai, rong), "Minesweeper", sf::Style::Default);
+    Font font;
+    if (!font.loadFromFile("visitor1.ttf"))
+    {
+        std::cout<<"Can't load visitor1.ttf";
+    }
+    Text number;
+    number.setFont(font);
+    number.setCharacterSize(30);
+    number.setFillColor(sf::Color::Red);
+    int countBomb = numBomb;
 
     Texture t;
     if(w==32) t.loadFromFile("images/tiles.jpg");
@@ -37,8 +43,8 @@ void showGameWindow() {
     Sprite s1;
     s1.setTexture(t1);
 
-    Texture t2;
-    Sprite s2;
+    Texture t2,t3;
+    Sprite s2,s3;
 
     SoundBuffer buffer;
     buffer.loadFromFile("sound/boom-expose.wav");
@@ -100,8 +106,8 @@ void showGameWindow() {
                     }
                     //nhấn chuột phải
                     else if(event.mouseButton.button == Mouse::Right&&show[x][y]>=10) {
-                        if(show[x][y]==10) show[x][y] = 11;
-                        else if(show[x][y]==11) show[x][y] = 13;
+                        if(show[x][y]==10) show[x][y] = 11,countBomb--;
+                        else if(show[x][y]==11) show[x][y] = 13,countBomb++;
                         else if(show[x][y]==13) show[x][y] = 10;
                     }
                 }
@@ -202,6 +208,17 @@ void showGameWindow() {
         s2.setTexture(t2);
         s2.setPosition(xHelp,yHelp);
         window.draw(s2);
+
+        t3.loadFromFile("images/point.png");
+        s3.setTexture(t3);
+        s3.setPosition(10,40);
+        window.draw(s3);
+        s3.setPosition(dai-70,40);
+        window.draw(s3);
+
+        number.setString(std::to_string(countBomb));
+        number.setPosition(dai-50,40);
+        window.draw(number);
 
         window.display();
     }

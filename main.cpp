@@ -9,6 +9,7 @@ int grid[maxn][maxn];
 int length,height;
 int numBomb,notOpen;
 int w;
+int sec, secSt;
 int show[maxn][maxn];
 int col[8]={-1,-1,-1,0,1,1,1,0};
 int row[8]={-1,0,1,1,1,0,-1,-1};
@@ -26,12 +27,12 @@ void setSize(int dai, int rong, int bom, int pix) {
     notOpen = length*height-numBomb;
 }
 
-#include "GridCreation.h"
-#include "Showing.h"
-#include "GameWindow.h"
-#include "MainWindow.h"
-#include "PlayWindow.h"
-#include "RankWindow.h"
+#include "include/GridCreation.h"
+#include "include/Showing.h"
+#include "include/GameWindow.h"
+#include "include/MainWindow.h"
+#include "include/PlayWindow.h"
+#include "include/RankWindow.h"
 
 //kiểm tra xem vị trí của chuột có nằm trong vùng từ (u,v) -> (u1,v1)
 bool inside(int x,int y,int u,int v,int u1,int v1) {

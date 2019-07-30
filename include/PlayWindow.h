@@ -19,7 +19,7 @@ void showPlayWindow() {
                         mainW.close();
                         std::ifstream read;
                         read.open("save.txt");
-                        read>>length>>height>>numBomb>>w>>notOpen;
+                        read>>length>>height>>numBomb>>w>>notOpen>>sec;
                         for(int i=1;i<=length;++i) {
                             for(int j=1;j<=height;++j) read>>grid[i][j];
                         }
@@ -30,6 +30,7 @@ void showPlayWindow() {
                             else cl[i][j]=0;
                         }
                         read.close();
+                        secSt = 0;
                         showGameWindow();
                     }
                     //nhấn nút new game
@@ -37,6 +38,8 @@ void showPlayWindow() {
                         mainW.close();
                         setSize(9,9,10,32);
                         setShow();
+                        sec = 0;
+                        secSt = 0;
                         showGameWindow();
                     }
                     //nhấn nút back

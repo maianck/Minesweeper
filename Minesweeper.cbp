@@ -48,13 +48,12 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="GameWindow.h" />
-		<Unit filename="GridCreation.h" />
-		<Unit filename="MainWindow.h" />
-		<Unit filename="PlayWindow.h" />
-		<Unit filename="RankWindow.h" />
-		<Unit filename="Setting.h" />
-		<Unit filename="Showing.h" />
+		<Unit filename="include/GameWindow.h" />
+		<Unit filename="include/GridCreation.h" />
+		<Unit filename="include/MainWindow.h" />
+		<Unit filename="include/PlayWindow.h" />
+		<Unit filename="include/RankWindow.h" />
+		<Unit filename="include/Showing.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

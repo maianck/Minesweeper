@@ -32,6 +32,8 @@ void showGameWindow() {
     number.setFillColor(sf::Color::Red);
     int countBomb = numBomb;
 
+    Clock clock;
+
     Texture t;
     if(w==32) t.loadFromFile("images/tiles.jpg");
     else t.loadFromFile("images/tiles25.jpg");
@@ -55,6 +57,7 @@ void showGameWindow() {
     int xFace = dai/2-20, yFace = 40;
     int xOption = 10, yOption = 10;
     int xHelp = 80, yHelp = 10;
+
     while (window.isOpen())
     {
         Vector2i pos = Mouse::getPosition(window);
@@ -68,7 +71,7 @@ void showGameWindow() {
                     std::ofstream write;
                     write.open("save.txt");
                     write<<length<<" "<<height<<" "<<numBomb<<" ";
-                    write<<w<<" "<<notOpen<<"\n";
+                    write<<w<<" "<<notOpen<<" "<<sec<<"\n";
                     for(int i=1;i<=length;++i) {
                         for(int j=1;j<=height;++j) write<<grid[i][j]<<" ";
                         write<<"\n";
@@ -90,6 +93,9 @@ void showGameWindow() {
                     if(event.mouseButton.button == Mouse::Left&&show[x][y]==10) {
                         //mở ô đầu tiên
                         if(notOpen == length*height-numBomb) {
+                            clock.restart();
+                            sec = 0;
+                            secSt = 0;
                             createGrid(x,y);
                         }
                         //xử lí mở ô
@@ -102,6 +108,35 @@ void showGameWindow() {
                             show[x][y]=12;
                             isLost = true;
                             sound.play();
+                        }
+                        if(notOpen==0&&isLost==false) {
+                            std::string file;
+                            if(numBomb==10) file = "beginner.txt";
+                            else if(numBomb==40) file = "medium.txt";
+                            else file = "advance.txt";
+                            std::ifstream input;
+                            input.open(file);
+                            int n;
+                            input>>n;
+                            int l[10];
+                            for(int i=1;i<=n;++i) input>>l[i];
+                            input.close();
+                            if(n<5) {
+                                std::ofstream output;
+                                output.open(file);
+                                l[++n] = sec;
+                                std::sort(l+1,l+n+1);
+                                output<<n<<"\n";
+                                for(int i=1;i<=n;++i) output<<l[i]<<"\n";
+                            }
+                            else if(sec<l[n]) {
+                                l[n] = sec;
+                                std::ofstream output;
+                                output.open(file);
+                                std::sort(l+1,l+n+1);
+                                output<<n<<"\n";
+                                for(int i=1;i<=n;++i) output<<l[i]<<"\n";
+                            }
                         }
                     }
                     //nhấn chuột phải
@@ -116,6 +151,8 @@ void showGameWindow() {
                     if(event.mouseButton.button == Mouse::Left) {
                         setShow();
                         notOpen = length*height-numBomb;
+                        sec = 0;secSt = 0;
+                        countBomb = numBomb;
                         isLost = false;
                     }
                 }
@@ -145,6 +182,7 @@ void showGameWindow() {
                                             window.close();
                                             setSize(9,9,10,32);
                                             setShow();
+                                            sec = 0;secSt = 0;
                                             showGameWindow();
                                         }
                                         if(inside(pos1.x,pos1.y,xMd,yMd,x1Md,y1Md)) {
@@ -152,6 +190,7 @@ void showGameWindow() {
                                             window.close();
                                             setSize(16,16,40,25);
                                             setShow();
+                                            sec = 0;secSt = 0;
                                             showGameWindow();
                                         }
                                         if(inside(pos1.x,pos1.y,xAd,yAd,x1Ad,y1Ad)) {
@@ -159,6 +198,7 @@ void showGameWindow() {
                                             window.close();
                                             setSize(30,16,99,25);
                                             setShow();
+                                            sec = 0;secSt = 0;
                                             showGameWindow();
                                         }
                                     }
@@ -178,12 +218,33 @@ void showGameWindow() {
             }
         }
         window.clear(Color(228,165,97));
+        t3.loadFromFile("images/point.png");
+        s3.setTexture(t3);
+        s3.setPosition(10,40);
+        window.draw(s3);
+        s3.setPosition(dai-70,40);
+        window.draw(s3);
+
+        number.setString(std::to_string(countBomb));
+        number.setPosition(dai-50,40);
+        window.draw(number);
+
+        Time time = clock.getElapsedTime();
+        if(notOpen<length*height-numBomb&&isLost!=true&&notOpen>0) {
+            if(time.asSeconds()>secSt&&sec<1000) sec++,secSt++;
+        }
+
+        number.setString(std::to_string(sec));
+        number.setPosition(20,40);
+        window.draw(number);
+
         if(isLost==true) {
             s1.setTextureRect(IntRect(40,40,40,40));
             s1.setPosition(xFace,yFace);
             window.draw(s1);
         }
         else if(notOpen==0&&isLost==false) {
+
             s1.setTextureRect(IntRect(0,40,40,40));
             s1.setPosition(xFace,yFace);
             window.draw(s1);
@@ -208,17 +269,6 @@ void showGameWindow() {
         s2.setTexture(t2);
         s2.setPosition(xHelp,yHelp);
         window.draw(s2);
-
-        t3.loadFromFile("images/point.png");
-        s3.setTexture(t3);
-        s3.setPosition(10,40);
-        window.draw(s3);
-        s3.setPosition(dai-70,40);
-        window.draw(s3);
-
-        number.setString(std::to_string(countBomb));
-        number.setPosition(dai-50,40);
-        window.draw(number);
 
         window.display();
     }

@@ -19,15 +19,12 @@ void createGrid(int x,int y) {
     }
     //Xây dựng sơ đồ
     for(int i=1;i<=length;++i)
-    for(int j=1;j<=height;++j) {
-        if(grid[i][j]==9) continue;
-        if(grid[i-1][j-1]==9) grid[i][j]++;
-        if(grid[i-1][j]==9) grid[i][j]++;
-        if(grid[i-1][j+1]==9) grid[i][j]++;
-        if(grid[i][j+1]==9) grid[i][j]++;
-        if(grid[i+1][j+1]==9) grid[i][j]++;
-        if(grid[i+1][j]==9) grid[i][j]++;
-        if(grid[i+1][j-1]==9) grid[i][j]++;
-        if(grid[i][j-1]==9) grid[i][j]++;
+    for(int j=1;j<=height;++j) if(grid[i][j]==0) {
+        for(int k=0;k<=7;++k) {
+            int u = i+col[k], v = j+row[k];
+            if(1<=u&&u<=length&&1<=v&&v<=height) {
+                if(grid[u][v]==9) grid[i][j]++;
+            }
+        }
     }
 }
